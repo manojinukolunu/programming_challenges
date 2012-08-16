@@ -1,0 +1,131 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  checkboard.cpp
+ *
+ *    Description:  
+ *
+ *        Version:  1.0
+ *        Created:  08/16/2012 12:50:47 AM
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  YOUR NAME (), 
+ *   Organization:  
+ *
+ * =====================================================================================
+ */
+#include <stdlib.h>
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+void check(char [][8]);
+void print_board(char [][8]);
+bool _check(char [][8],int ,int,char);
+bool check_left(char [][8],int,int,char);
+bool check_right(char [][8],int ,int ,char);
+bool check_top(char [][8],int ,int ,char);
+bool check_bottom(char [][8] ,int ,int ,char);
+bool check_left_top(char [][8],int ,int ,char);
+bool check_right_top(char [][8],int ,int,char);
+bool check_left_bottom(char[][8],int ,int,char);
+bool check_right_bottom(char [][8],int ,int ,char);
+
+
+
+
+int main(int argc,char ** argv){
+	char board[8][8];// input is direct 8x8 already known
+	string dummy;
+	while (1){
+		for(int i=0;i<8;i++){
+			for(int j=0;j<8;j++){
+				cin >> board[i][j];
+				}
+			}
+		
+	getline(cin,dummy);
+	getline(cin,dummy);
+	int count=0;
+	for(int i=0;i<8;i++){
+		for(int j=0;j<8; j++){
+			if (board[i][j]=='.'){
+				count++;
+			}
+		}
+		
+	}
+	if (count == 64){
+		break;
+	}
+
+	//now we have the board check if the king is in check
+	
+	check(board);
+
+	}
+	
+	return 0;
+	
+}
+
+void  check(char board[][8] ){
+	//find the position of both kings first
+	
+	int black_row,black_column,white_row,white_column;
+	for(int i=0;i<8;i++){
+		for (int j=0;j<8;j++){
+			if (board[i][j]=='k'){//looking for black king first
+				black_row=i;
+				black_column=j;
+			}
+			if (board[i][j]=='K'){
+				white_row=i;
+				white_column=j;
+			}
+		}
+	}
+	//now we have both the black and white kings position
+	//check if they are in check.
+	
+	if(_check(board,black_row,black_column,'b')){
+		cout << "Black King is in Check" <<endl;
+		
+	}
+	else if(_check(board,white_row,white_column,'w')){
+		cout << "White King is in Check " << endl;
+	}
+
+}
+
+void print_board(char board[][8]){
+	for(int i=0;i<8;i++){
+		for (int j=0;j<8;j++){
+			cout << board[i][j];
+		}
+	}
+}
+
+bool _check(char board[][8],int row,int column,char type){
+	//now extract the left,right,top,bottom and both diagnols for the king
+	//
+	
+	vector<char> left,right,top,bottom,left_top_diag,right_top_diag,left_bottom_diag,right_bottom_diag;
+	
+	for(int i=column;i>=0;i--){
+		left.push_back(board[row][i]);
+	}
+	for(int i=column;i<8;i++){
+		right.insert(0,board[row][i]);
+	}
+	for (int i=row;i>=0;i--){
+		top.push_back(board[i][column]);
+	}	
+	for(int i=row;i<8;i++){
+		bottom.insert(0,board[i][column]);
+	}
+	return true;
+}
+}
