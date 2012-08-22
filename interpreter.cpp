@@ -57,6 +57,8 @@ int main(int argc,char ** argv){
 	return 0;
 }
 
+
+//returns the total number of instructions executed
 int execute(vector<int> * ram1, vector<int> * registers1){
 	vector<int> ram=*ram1;
 	vector<int> registers=*registers1;
