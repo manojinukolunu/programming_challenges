@@ -1,8 +1,6 @@
-
 #include "poker.h"
 int main(int argc,char ** argv){
     char c,suit;
-
     string st="--23456789TJQKA";
     while (1){
         vector <char> white_suit,black_suit;
@@ -25,101 +23,69 @@ int main(int argc,char ** argv){
             }
         }
          //Now we have both the cards and suits in the vectors
-
          //get the card counts in the arrays
         int black_kind[14],white_kind[14];//these arrays are used to determine the kind
-
         reset(black_kind,14);
         reset(white_kind,14);
         card_count(black_kind,black_card);
         card_count(white_kind,white_card);
         sort(black_card.begin(),black_card.end());
         sort(white_card.begin(),white_card.end());
-        int black=process(black_kind,black_card,black_suit);
-       // cout << "After black " << endl;
-        //printarr(black_kind,14);
-        int white=process(white_kind,white_card,white_suit);
-        //cout << "After WHite " << white << endl;
-
-        if (black > white){
-            cout << "black after process" << black << endl;
-            cout << "Black wins" << endl;
-        }
-        else if(black < white){
-            cout << "white after process" <<
-            white  << endl;
-            cout << "White wins" << endl;
-        }
-        else if(black==white){
-            cout << "Black equal" << black<<endl;
-            if (black==-1){
-                int card=highcard(black_card,white_card);
-                if (card==1)
-                    cout << "Black wins "<<endl;
-                else if (card==2)
-                    cout << "White wins "<< endl;
-            }
-            switch (black){
-                case 1:
-                    //pair
-                    int black_pair;
-                    int white_pair;
-                    int black_pair_index;
-                    int white_pair_index;
-                    for (int i=0;i<14;i++){
-                        if (black_kind[i]==2){
-                            black_pair=black_card[i];
-                            black_pair_index=i;
-                        }
-                        if (white_kind[i]==2){
-                            white_pair=white_card[i];
-                            white_pair_index=i;
-                        }
-                    }
-
-                    if(black_pair>white_pair){
-                        cout << "Black wins" << endl;
-                    }
-                    else if(white_pair > black_pair){
-                        cout << "White wins" << endl;
-                    }
-                    else {
-                        for (int i=black_pair_index,j=white_pair_index;i<5,j<5;i++,j++){
-                            if (black_card[i]>white_card[j]){
-                                cout << "Black wins" << endl;
-                                break;
-                            }
-                            else if(black_card[i]< white_card[j]){
-                                cout << "White wins" << endl;
-                                break;
-                            }
-                        }
-                    }
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5 :
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    break;
-                case 8:
-                    break;
-
-
-            }
-        }
-
-
+        int * black=process(black_kind,black_card,black_suit);
+        int * white=process(white_kind,white_card,white_suit);
     }
     return 0;
 }
-int process(int kind[14],vector <int> cards,vector <char> suit){
+
+
+vector <int>  processnew(int kind[14],vector <int> cards ,vector <char> suit) {
+	//first check for flush and straight flush
+	vector <int> returnVector;
+	if (straightFlush(cards,suit){
+		returnVector.push_back(8);
+		returnVector.push_back(cards.back());
+		return returnVector;
+	}
+	if (kind4(kind)){
+		returnVector.push_back(7);
+		for (int i=0;i<14;i++){	
+			if (kind[i]==14){
+				returnVector.push_back(i);
+				return returnVector;
+			}
+		}
+	}
+	if (fullhouse(kind)){
+		returnVector.push_back(6)
+		for (int i=0;i<14;i++){
+			if (kind[i]==3){
+				
+			}
+			if (kind[i]==2){
+			
+			}
+			
+		}
+		
+	}
+	if(flush(cards,suit)){
+		returnVector.push_back(5);
+		returnVector.insert(returnVector.end(),cards.begin(),cards.end());
+	}
+	if(straight(cards)){
+		returnVector.push_back4);
+		returnVector.insert(returnVector.end(),cards.begin(),cards.end());
+	}
+	
+}
+
+
+
+
+
+
+
+int * process(int kind[14],vector <int> cards,vector <char> suit){
     if (straightFlush(cards,suit)){
         cout << "Straight flush " <<endl;
         printvecint(cards);
