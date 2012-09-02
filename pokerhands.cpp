@@ -27,46 +27,54 @@ int main(int argc,char ** argv){
          //Now we have both the cards and suits in the vectors
 
          //get the card counts in the arrays
-        int black_kind[14],white_kind[14];//these arrays are used to determine the kind
+        int black_kind[15],white_kind[15];//these arrays are used to determine the kind
 
-        reset(black_kind,14);
-        reset(white_kind,14);
+        reset(black_kind,15);
+        reset(white_kind,15);
         card_count(black_kind,black_card);
         card_count(white_kind,white_card);
+        cout << endl;
+        printarr(black_kind,15);
+        cout << endl;
+        printarr(white_kind,15);
+        cout << endl;
         sort(black_card.begin(),black_card.end());
         sort(white_card.begin(),white_card.end());
         int black=process(black_kind,black_card,black_suit);
        // cout << "After black " << endl;
-        //printarr(black_kind,14);
+        //printarr(black_kind,15);
         int white=process(white_kind,white_card,white_suit);
         //cout << "After WHite " << white << endl;
 
         if (black > white){
-            cout << "black after process" << black << endl;
+            //cout << "black after process" << black << endl;
             cout << "Black wins" << endl;
         }
         else if(black < white){
-            cout << "white after process" <<
-            white  << endl;
+            //cout << "white after process" <<
+            //white  << endl;
             cout << "White wins" << endl;
         }
         else if(black==white){
-            cout << "Black equal" << black<<endl;
+            //cout << "Black equal" << black<<endl;
             if (black==-1){
                 int card=highcard(black_card,white_card);
                 if (card==1)
                     cout << "Black wins "<<endl;
                 else if (card==2)
                     cout << "White wins "<< endl;
+                else
+                    cout << "Tie" << endl;
             }
             switch (black){
+                int card;
                 case 1:
                     //pair
                     int black_pair;
                     int white_pair;
                     int black_pair_index;
                     int white_pair_index;
-                    for (int i=0;i<14;i++){
+                    for (int i=0;i<15;i++){
                         if (black_kind[i]==2){
                             black_pair=black_card[i];
                             black_pair_index=i;
@@ -97,18 +105,136 @@ int main(int argc,char ** argv){
                     }
                     break;
                 case 2:
+                    int first_paircard_black,second_paricard_white,second_paricard_black,other_card_black,other_card_white;
+                    int first_paircard_white,paircount_black,paircount_white;
+                    for (int i=0;i<15;i++){
+                        if(black_kind[i]==2){
+                            first_paircard_black=i;
+                            paircount_black++;
+                        }
+                        if (white_kind[i]==2){
+                            first_paircard_white=i;
+                            paircount_white++;
+                        }
+                        if (paircount_black==2 && black_kind[i]==2){
+                            second_paricard_black=i;
+                        }
+                        if(paircount_white==2 && white_kind[i]==2){
+                            second_paricard_white=i;
+                        }
+                        if (white_kind[i]==1)
+                            other_card_white=i;
+                        if (black_kind[i]==1)
+                            other_card_black=i;
+                    }
+                    if (first_paircard_white>first_paircard_black){
+                        cout << "White wins" << endl;
+                    }
+                    else if(first_paircard_white<first_paircard_black){
+                        cout << "Black wins" <<endl;
+                    }
+                    else {
+                        if (second_paricard_black>second_paricard_white){
+                            cout << "Black Wins" << endl;
+                        }
+                        else if(second_paricard_black<second_paricard_white){
+                            cout << "White Wins" << endl;
+                        }
+                        else {
+                            if (other_card_black>other_card_white){
+                                cout << " Black Wins " << endl;
+                            }
+                            else if(other_card_white> other_card_black){
+                                cout << " Black Wins"<< endl;
+                            }
+                            else
+                                cout << "Tie" << endl;
+                        }
+                    }
+
                     break;
                 case 3:
+                    int black_3_kind,white_3_kind;
+                    for (int i=0;i<15;i++){
+                        if (black_kind[i]==3)
+                            black_3_kind=i;
+                        if (white_kind[i]==3)
+                            white_3_kind=i;
+                    }
+                    if (black_3_kind>white_3_kind){
+                        cout << "Black Wins" << endl;
+                    }
+                    else if(white_3_kind>black_3_kind){
+                        cout << "White wins" << endl;
+                    }
+                    else {
+                        cout << "Tie" << endl;
+                    }
                     break;
                 case 4:
+                    if (white_card.back()>black_card.back()){
+                        cout << "White wins" << endl;
+                    }
+                    else if(black_card.back() > white_card.back()){
+                        cout << "Black wins" << endl;
+                    }
+                    else
+                        cout << "Tie" << endl;
                     break;
                 case 5 :
+                    card=highcard(black_card,white_card);
+                    if (card==1)
+                        cout << "Black wins "<<endl;
+                    else if (card==2)
+                        cout << "White wins "<< endl;
                     break;
                 case 6:
+                    for (int i=0;i<15;i++){
+                        if (black_kind[i]==3)
+                            black_3_kind=i;
+                        if (white_kind[i]==3)
+                            white_3_kind=i;
+                    }
+                    if (black_3_kind>white_3_kind){
+                        cout << "Black Wins" << endl;
+                    }
+                    else if(white_3_kind>black_3_kind){
+                        cout << "White wins" << endl;
+                    }
+                    else {
+                        cout << "Tie" << endl;
+                    }
                     break;
                 case 7:
+                    int black_4_kind,white_4_kind;
+                    for (int i=0;i<15;i++){
+                        if (black_kind[i]==4){
+                            black_4_kind=i;
+                        }
+                        if (white_kind[i]==4){
+                            white_4_kind=i;
+                        }
+                    }
+                    if (black_4_kind>white_4_kind){
+                        cout << "Black Wins" << endl;
+                    }
+                    else if(white_4_kind>black_4_kind){
+                        cout << "White wins" << endl;
+                    }
+                    else {
+                        cout << "Tie" << endl;
+                    }
                     break;
                 case 8:
+                    if( black_card[4] == white_card[4]){
+                        cout << "Tie" <<endl;
+                    }
+                    else if(black_card[4]>white_card[4]){
+                        cout << "Black WIns" <<endl;
+                    }
+                    else if(white_card[4]>black_card[4]){
+                        cout << "White wins" << endl;
+                    }
                     break;
 
 
@@ -119,7 +245,7 @@ int main(int argc,char ** argv){
     }
     return 0;
 }
-int process(int kind[14],vector <int> cards,vector <char> suit){
+int process(int kind[15],vector <int> cards,vector <char> suit){
     if (straightFlush(cards,suit)){
         cout << "Straight flush " <<endl;
         printvecint(cards);
@@ -127,12 +253,12 @@ int process(int kind[14],vector <int> cards,vector <char> suit){
     }
     else if(kind4(kind)){
         cout << "4 of a kind"<<endl;
-        printarr(kind,14);
+        printarr(kind,15);
         return 7;
     }
     else if (fullhouse(kind)){
         cout << "Full house" << endl;
-        printarr(kind,14);
+        printarr(kind,15);
         return 6;
     }
     else if (flush(suit)){
@@ -147,17 +273,17 @@ int process(int kind[14],vector <int> cards,vector <char> suit){
     }
     else if(kind3(kind)){
         cout << "3 of a kind" << endl;
-        printarr(kind,14);
+        printarr(kind,15);
         return 3;
     }
     else if (pair2(kind)){
         cout << "2 pair" << endl;
-        printarr(kind,14);
+        printarr(kind,15);
         return 2;
     }
     else if (pair1(kind)){
         cout <<"pair" << endl;
-        printarr(kind,14);
+        printarr(kind,15);
         return 1;
     }
     else {
@@ -167,17 +293,17 @@ int process(int kind[14],vector <int> cards,vector <char> suit){
     }
 
 }
-bool pair1(int kind[14]){
-    for (int i=0;i<14;i++){
+bool pair1(int kind[15]){
+    for (int i=0;i<15;i++){
         if (kind[i]==2){
             return true;
         }
     }
     return false;
 }
-bool pair2(int kind[14]){
+bool pair2(int kind[15]){
     int count=0;
-    for (int i=0;i<14;i++){
+    for (int i=0;i<15;i++){
         if (kind[i]==2){
             count++;
         }
@@ -206,7 +332,7 @@ bool straight(vector<int> cards){
         return false;
     }
 }
-bool fullhouse(int kind[14]){
+bool fullhouse(int kind[15]){
     //cout << " In Full House" << kind3(kind) << pair1(kind) << endl;
     if (kind3(kind) && pair1(kind)){
       //  cout << "True" << endl;
@@ -225,16 +351,16 @@ bool straightFlush(vector<int> cards,vector<char> suit){
             return false;
     }
 }
-bool kind4(int kind[14]){
-    for(int i=0;i<14 ;i++){
+bool kind4(int kind[15]){
+    for(int i=0;i<15 ;i++){
         if(kind[i]==4){
             return true;
         }
     }
     return false;
 }
-bool kind3(int kind[14]){
-    for(int i=0;i<14;i++){
+bool kind3(int kind[15]){
+    for(int i=0;i<15;i++){
         if (kind[i]==3){
             return true;
         }
@@ -250,7 +376,7 @@ bool checkSuit(vector <char> suit){
     }
     return true;
 }
-void card_count(int  kind[14],vector <int> card){
+void card_count(int  kind[15],vector <int> card){
     for (int i=0;i<card.size();i++){
             if (kind[card[i]]!=0){
                 kind[card[i]]++;
