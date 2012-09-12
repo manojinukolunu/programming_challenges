@@ -48,7 +48,7 @@ vector <int>  processnew(int kind[14],vector <int> cards ,vector <char> suit) {
 	}
 	if (kind4(kind)){
 		returnVector.push_back(7);
-		for (int i=0;i<14;i++){	
+		for (int i=0;i<14;i++){
 			if (kind[i]==14){
 				returnVector.push_back(i);
 				return returnVector;
@@ -59,14 +59,14 @@ vector <int>  processnew(int kind[14],vector <int> cards ,vector <char> suit) {
 		returnVector.push_back(6)
 		for (int i=0;i<14;i++){
 			if (kind[i]==3){
-				
+
 			}
 			if (kind[i]==2){
-			
+
 			}
-			
+
 		}
-		
+
 	}
 	if(flush(cards,suit)){
 		returnVector.push_back(5);
@@ -76,11 +76,43 @@ vector <int>  processnew(int kind[14],vector <int> cards ,vector <char> suit) {
 		returnVector.push_back4);
 		returnVector.insert(returnVector.end(),cards.begin(),cards.end());
 	}
-	
+
 }
 
 
+vector <int> cardsofkind(int n, int kind[14],vector <int> cards){
+    //lets first examine 2 pair and pair
+    int paircount=0;
+    if (n==2){//2 of a kind
+        for (int i=0;i<14;i++){
+            if (kind[i]==2 && paircount==2){
+                returnVector.push_back(i);
+            }
+            else if(kind[i]==2 && paircount==1){
+                returnVector.push_back(i);
+            }
+        }
+        if (paircount==1){
+            returnVector.insert(0,1);
+        }
+        else if(paircount==2){
+            returnVector.insert(0,2);
+        }
+        for (int i=0;i<5;i++){
+            if (kind[cards[i]]!=2){
+                returnVector.push_back(cards[i]);
+            }
+        }
+        return returnVector;
+    }
+    vector <int> returnVector;
+    for (int i=0;i<14;i++){
+        if (kind[i]==n){
+            returnVector.push_back(i);
+        }
+    }
 
+}
 
 
 
