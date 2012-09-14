@@ -47,9 +47,13 @@ int main(int argc,char ** argv){
         sort(enc_words.begin(),enc_words.end(),comp);
         //now enc_words has all the encrypted words in a sorted order
         map<char,char> replacement=construct_replacement(enc_words,dict);
-         for( map<char,char>::iterator ii=replacement.begin(); ii!=replacement.end(); ++ii)
-        {
-            cout << (*ii).first << ": " << (*ii).second << endl;
+        if (replacement.empty()){
+            cout << "No solution";
+        }
+        else{
+            for( map<char,char>::iterator ii=replacement.begin(); ii!=replacement.end(); ++ii){
+                cout << (*ii).first << ": " << (*ii).second << endl;
+            }
         }
         printvec(enc_words);
 	}
@@ -58,10 +62,12 @@ int main(int argc,char ** argv){
 map<char,char> construct_replacement(vector<string>enc_words,vector<string>dict){
     map<char,char> replacement;
      map<char,char>::iterator it;
+     bool solution;
     for (int i=0;i<enc_words.size();i++){
         // start with the longest word in the
         //encrypted text and match with the dictionary
         if(enc_words[i].size()!=dict[i].size()){
+            solution = false;
             break;
         }
         else{
@@ -73,7 +79,14 @@ map<char,char> construct_replacement(vector<string>enc_words,vector<string>dict)
         }
     }
 
-    return replacement;
+    if (solution){
+        return replacement;
+    }
+    else {
+        map<char,char> empty;
+        return empty;
+    }
+    //return replacement;
 
 }
 
