@@ -3,7 +3,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-
+#include <string.h>
 
 
 using namespace std;
@@ -61,6 +61,10 @@ int main(int argc,char **argv){
                 stringstream stream(paper);
                 string word;
                 while(getline(stream,word,',')){
+                    size_t found;
+                    found = word.find(".");
+                    if (found ==string::npos)
+                    //cout << word.find(".")<< endl;
                     cout << word << endl;
                 }
 
