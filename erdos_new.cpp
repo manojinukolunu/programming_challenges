@@ -13,20 +13,13 @@ using namespace std;
 
 vector <string> split(string str);
 void printvec(vector<string> sorted);
-string strip(string);
 
-class Author{
+
+class Node{
     public:
-        int number;
-        string name;
+        string nodeName;
+        vector<string> neighbours;
 
-};
-struct ltstr
-{
-  bool operator()(Author s1, Author s2) const
-  {
-    return s1.name==s2.name;
-  }
 };
 
 int main(int argc,char ** argv){
@@ -48,20 +41,8 @@ int main(int argc,char ** argv){
             //cout << "Paper"<<paper << endl;
             if (paper!="")
                 authors = split(paper);
-            vector<Author> list;
-            if(foundErdos!=string::npos){
-                //this means erdos is there in the list of authors
-                // set the erdos numbers of the authors to 1
-                for (int i=0;i<authors.size();i++){
-                    Author A;
-                    A.number=1;
-                    A.name=authors[i];
-                    if (authors[i]!="Erdos, P")
-                        list.push_back(A);
-                }
-            }
-            //printvec(authors);
-
+            printvec(authors);
+            cout << endl;
         }
     }
 }
@@ -94,9 +75,5 @@ void printvec(vector<string> sorted){
 
 }
 
-string strip(string str){
-
-
-}
 
 
