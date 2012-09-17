@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1347629539 source:/home/manoj/Projects/programming_challenges/str.cpp
+	<iostream>
+	<string>
+	<sstream>
+	<vector>
+	<algorithm>
+	<map>
+

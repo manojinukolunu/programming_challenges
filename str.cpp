@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <map>
 
+#define debug 1
+
 using namespace std;
 
 
@@ -128,10 +130,14 @@ int main(int argc,char **argv){
 	d->printdict();
 
 	while(1){
+	    #ifdef debug
 	    cout << " in wile 1 loop" << endl;
+	    #endif
 		string enc_string;
 		getline(cin,enc_string);
+		#ifdef debug
 		cout << enc_string << endl;
+		#endif
         vector<string> enc_words;
         istringstream iss(enc_string);
         while(iss){
