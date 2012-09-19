@@ -1,0 +1,59 @@
+
+import java.util.*;
+import java.io.*;
+
+public class Erdos {
+	public ArrayList<String> split(String paper){
+		String [] local = paper.split(".:");
+		System.out.println(local[0]+local[1]);
+	}
+	public void execute(){
+		String start = "Erdos, P";
+		int scenarios,P,N;
+		Scanner scan = null ;
+		try {
+			scan = new Scanner(new File("erdos.txt"));
+		} catch (FileNotFoundException e) {
+			System.out.println("Unable to open file");
+			e.printStackTrace();
+		}
+		
+		scenarios = Integer.parseInt(scan.nextLine().trim());
+		String [] papers = scan.nextLine().split(" ");
+		P = Integer.parseInt(papers[0]);
+		N = Integer.parseInt(papers[1]);
+		
+		System.out.println(scenarios);
+		System.out.println(P);
+		System.out.println(N);
+		String paper;
+		while(scenarios-- >0){
+			HashMap <String,Set<String> > graph =  new HashMap<String,Set<String> > ();
+			do{
+	            paper = scan.nextLine();
+	            ArrayList<String> authors;
+	            if (paper!="")
+	                authors = split(paper);
+	            int size = authors.size();
+	            for(int i=0;i<size;i++){
+	                for(int j=0 ;j<size;j++){
+	                    if (i!=j){
+	                        it = graph.find(authors[i]);
+	                        if(it==graph.end()){
+	                            graph[authors[i]].insert(authors[j]);
+	                        }
+	                        else{
+	                            (*it).second.insert(authors[j]);
+	                        }
+	                    }
+	                }
+	            }
+	        }while(P-->0);
+			
+		}
+		
+		
+		
+	}
+
+}

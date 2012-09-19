@@ -1,0 +1,10 @@
+
+public class Erdos {
+	public void execute(){
+		String start = "Erdos, P";
+		int scenarios,P,N;
+		Scanner scan = new Scanner();
+		
+	}
+
+}

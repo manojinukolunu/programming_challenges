@@ -1,0 +1,21 @@
+
+import java.util.*;
+import java.io.*;
+
+public class Erdos {
+	public void execute(){
+		String start = "Erdos, P";
+		int scenarios,P,N;
+		try {
+			Scanner scan = new Scanner(new File("erdos.txt"));
+		} catch (FileNotFoundException e) {
+			System.out.println("Unable to open file");
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+
+}

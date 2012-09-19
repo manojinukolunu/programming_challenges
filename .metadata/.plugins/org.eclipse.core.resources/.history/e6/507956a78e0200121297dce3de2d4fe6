@@ -1,0 +1,74 @@
+
+import java.util.*;
+import java.io.*;
+
+public class Erdos {
+	public ArrayList<String> split(String paper){
+		String [] local = paper.split(".:");
+		String [] authors = local[0].split("\\.,");
+		return new ArrayList<String>(Arrays.asList(authors));
+	}
+	
+	public void execute(){
+		String start = "Erdos, P";
+		int scenarios,P,N;
+		Scanner scan = null ;
+		try {
+			scan = new Scanner(new File("erdos.txt"));
+		} catch (FileNotFoundException e) {
+			System.out.println("Unable to open file");
+			e.printStackTrace();
+		}
+		
+		scenarios = Integer.parseInt(scan.nextLine().trim());
+		String [] papers = scan.nextLine().split(" ");
+		P = Integer.parseInt(papers[0]);
+		N = Integer.parseInt(papers[1]);
+		
+		System.out.println(scenarios);
+		System.out.println(P);
+		System.out.println(N);
+		String paper;
+		while(scenarios-- >0){
+			HashMap <String,HashSet<String> > graph =  new HashMap<String,HashSet<String> > ();
+			do{
+	            paper = scan.nextLine();
+	            ArrayList<String> authors = null;
+	            if (paper!="")
+	                authors = split(paper);
+	            // now authors has the list of authors for the particular paper
+	            //constructing the graph
+	            for(String author : authors){
+	            	HashSet<String> s = new HashSet<String>();
+	            	for(String author1 : authors){
+	            		if(!author1.equals(author)){
+	            			s.add(author1);
+	            			
+	            		}
+	            	}
+	            	if(graph.containsKey(author)){
+	            		HashSet<String> s1 = new HashSet<String>();
+	            		s1 = graph.get(author);
+	            		for(String author1 : authors){
+		            		if(!author1.equals(author)){
+		            			s1.add(author1);
+		            			
+		            		}
+		            	}
+	            		graph.put(author, s1);
+	            	}
+	            	else{
+	            		graph.put(author, s);
+	            	}
+	            		
+	            }
+	        
+	        }while(--P>0);
+			
+		}
+		
+		
+		
+	}
+
+}

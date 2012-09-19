@@ -14,6 +14,9 @@ class submission{
         int time;
         char L;
         bool operator <(const submission& s1){
+            if(L=='C'){
+                return
+            }
             return true;
         }
 };
