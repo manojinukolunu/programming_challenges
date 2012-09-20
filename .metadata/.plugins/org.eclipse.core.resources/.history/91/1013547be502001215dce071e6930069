@@ -1,0 +1,16 @@
+
+
+import java.util.*;
+import java.io.*;
+
+
+
+public class contest_scoreboard {
+	
+	public void execute(){
+		Scanner scan = new Scanner(new File("contest_scoreboard.txt"));
+		
+		
+	}
+
+}

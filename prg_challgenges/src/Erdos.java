@@ -4,8 +4,6 @@ import java.io.*;
 
 public class Erdos {
 	public String start = "Erdos, P";
-	
-	
 	public ArrayList<String> split(String paper){
 		ArrayList<String> returnval = new ArrayList<String>();
 		String [] local = paper.split(".:");
@@ -66,7 +64,7 @@ public class Erdos {
 	            	else{
 	            		graph.put(author, s);
 	            	}
-	            		
+	           	
 	            }
 	        
 	        }while(--P>0);

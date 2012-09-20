@@ -1,0 +1,18 @@
+
+
+import java.util.*;
+import java.io.*;
+
+
+
+public class contest_scoreboard {
+	
+	public void execute() throws FileNotFoundException{
+		int num_test_cases;
+		Scanner scan = new Scanner(new File("contest_scoreboard.txt"));
+		scan.nextLine()
+		
+		
+	}
+
+}
