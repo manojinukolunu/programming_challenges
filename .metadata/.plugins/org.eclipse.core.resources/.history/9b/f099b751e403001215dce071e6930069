@@ -90,10 +90,9 @@ public class contest_scoreboard {
 			}
 			
 		}
-		
-		ArrayList <Contestant> val= new ArrayList<Contestant>(map.values());
+		ArrayList <Contestant> val= (ArrayList<Contestant>) map.values();
 		for(Contestant c1 : val){
-			System.out.println(c1.team_number + " "+ c1.number_of_problems_solved+" "+c1.total_penalty);
+			System.out.println(c1.team_number + " "+ c1.number_of_problems_solved);
 		}
 		
 		
