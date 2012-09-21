@@ -1,0 +1,67 @@
+
+
+import java.util.*;
+import java.io.*;
+
+
+class Contestant{
+	int team_number;
+	int number_of_problems_solved;
+	int correct_submissions[] = new int[9];
+	int incorrect_submissions[] = new int[9];
+	int total_penalty;
+}
+
+
+public class contest_scoreboard {
+	
+	public void execute() throws FileNotFoundException{
+		int num_test_cases;
+		Scanner scan = new Scanner(new File("contest_scoreboard.txt"));
+		HashMap <Integer,Contestant> map= new HashMap<Integer,Contestant>();
+		num_test_cases = Integer.parseInt(scan.nextLine().trim());
+		System.out.println(num_test_cases);
+		scan.nextLine();
+		String next=null;
+		Contestant c;
+		while(num_test_cases-->0){
+			while(scan.hasNextLine()){
+				next = scan.nextLine();
+				if(next.equals("")){
+					break;
+				}
+				String [] input = next.split(" ");
+				if (map.containsKey(input[0])){
+					//This means that the contestant is already there
+					// so get the last line to check for I or C
+					// and update accordingly
+					c=map.get(input[0]);
+					if (input[3].equals("I")){
+						//update the incorrect array of the contestant
+						c.incorrect_submissions[Integer.parseInt(input[1].trim())]++;
+					}
+					else if(input[3].equals("C")){
+						c.correct_submissions[Integer.parseInt(input[1].trim())]=1;
+					}
+					
+				}
+				else{
+					c= new Contestant();
+					c.team_number=Integer.parseInt(input[0]);
+					if(input[3].equals("I")){
+						c.incorrect_submissions[Integer.parseInt(input[1])]++;
+					}
+					else if(input[3].equals("C")){
+						c.correct_submissions[Integer.parseInt(input[1])]=1;
+						//now calculate the time penalty
+						c.total_penalty=input[2]
+					}
+				}
+				
+			}
+		}
+		
+		
+	}
+
+}

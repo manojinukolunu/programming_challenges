@@ -5,10 +5,11 @@ import java.io.*;
 
 
 class Contestant{
-	int number_of_problems_solved;
+	int team_number;
+	int number_of_problems_solved=0;
 	int correct_submissions[] = new int[9];
 	int incorrect_submissions[] = new int[9];
-	int total_penalty;
+	int total_penalty=0;
 }
 
 
@@ -17,18 +18,64 @@ public class contest_scoreboard {
 	public void execute() throws FileNotFoundException{
 		int num_test_cases;
 		Scanner scan = new Scanner(new File("contest_scoreboard.txt"));
-		HashSet <Contestant> map= new HashSet<Contestant>();
+		HashMap <Integer,Contestant> map= new HashMap<Integer,Contestant>();
 		num_test_cases = Integer.parseInt(scan.nextLine().trim());
-		System.out.println(num_test_cases);
+		//System.out.println(num_test_cases);
 		scan.nextLine();
 		String next=null;
+		Contestant c;
 		while(num_test_cases-->0){
-			while((next=scan.nextLine())!=""){
+			while(scan.hasNextLine()){
+				next = scan.nextLine();
+				if(next.equals("")){
+					break;
+				}
+				String [] input = next.split(" ");
+				if (map.containsKey(Integer.parseInt(input[0]))){
+					//This means that the contestant is already there
+					// so get the last line to check for I or C
+					// and update accordingly
+					c=map.get(Integer.parseInt(input[0]));
+					if (input[3].equals("I")){
+						//update the incorrect array of the contestant
+						c.incorrect_submissions[Integer.parseInt(input[1].trim())]++;
+					}
+					else if(input[3].equals("C")){
+						c.number_of_problems_solved++;
+						c.correct_submissions[Integer.parseInt(input[1].trim())]=1;
+						//now calculate the time penalty
+						c.total_penalty+=Integer.parseInt(input[2].trim())+(20*c.incorrect_submissions[Integer.parseInt(input[1].trim())]);
+						
+					}
+				
+				}
+				else{
+					c= new Contestant();
+					c.team_number=Integer.parseInt(input[0]);
+					if(input[3].equals("I")){
+						c.incorrect_submissions[Integer.parseInt(input[1])]++;
+					}
+					else if(input[3].equals("C")){
+						c.number_of_problems_solved++;
+						c.correct_submissions[Integer.parseInt(input[1])]=1;
+						//now calculate the time penalty
+						c.total_penalty+=Integer.parseInt(input[2].trim())+(20*c.incorrect_submissions[Integer.parseInt(input[1].trim())]);
+					}
+					map.put(Integer.parseInt(input[0]), c);
+				}
 				
 				
 			}
 			
-			
+		}
+		Collections.sort(map);
+		//System.out.println("Here");
+		System.out.println(map.size());
+		for(int C:map.keySet()){
+			//System.out.println("Here");
+			System.out.println();
+			System.out.println();
+			System.out.println( map.get(C).team_number + "  "+map.get(C).number_of_problems_solved +" "+ map.get(C).total_penalty);
 		}
 		
 		
